@@ -17,13 +17,7 @@ CS_VOID * CS_PUBLIC
 srv_alloc (
   CS_INT size
 ) {
-  void *mem = malloc((size_t) size);
-
-  if (NULL != mem) {
-    return ((CS_VOID *) mem);
-  } else {
-    return ((CS_VOID *) NULL);
-  }
+  return (_srv_alloc(size));
 } /* srv_alloc() */
 
 /* ------------------------------------------------------------------------- */
@@ -38,7 +32,7 @@ srv_alt_bind (
   CS_INT      *varlenp,
   CS_SMALLINT *indp
 ) {
-  return (CS_FAIL);
+  return (_srv_alt_bind(spp, altid, item, lclfmtp, varaddrp, varlenp, indp));
 } /* srv_alt_bind() */
 
 /* ------------------------------------------------------------------------- */
@@ -52,7 +46,7 @@ srv_alt_descfmt (
   CS_INT      item,
   CS_DATAFMT *rmtfmtp
 ) {
-  return (CS_FAIL);
+  return (_srv_alt_descfmt(spp, altid, optype, operand, item, rmtfmtp));
 } /* srv_alt_descfmt() */
 
 /* ------------------------------------------------------------------------- */
@@ -62,7 +56,7 @@ srv_alt_exist (
   SRV_PROC *spp,
   CS_INT    altid
 ) {
-  return (CS_FAIL);
+  return (_srv_alt_exist(spp, altid));
 } /* srv_alt_exist() */
 
 /* ------------------------------------------------------------------------- */
@@ -74,7 +68,7 @@ srv_alt_header (
   CS_INT       numbylist,
   CS_SMALLINT *bylistarray
 ) {
-  return (CS_FAIL);
+  return (_srv_alt_header(spp, altid, numbylist, bylistarray));
 } /* srv_alt_header() */
 
 /* ------------------------------------------------------------------------- */
@@ -84,7 +78,7 @@ srv_alt_xferdata (
   SRV_PROC *spp,
   CS_INT    altid
 ) {
-  return (CS_FAIL);
+  return (_srv_alt_xferdata(spp, altid));
 } /* srv_alt_xferdata() */
 
 /* ------------------------------------------------------------------------- */
@@ -100,7 +94,7 @@ srv_bind (
   CS_INT      *varlenp,
   CS_SMALLINT *indp
 ) {
-  return (CS_FAIL);
+  return (_srv_bind(spp, cmd, type, item, lclfmtp, varaddrp, varlenp, indp));
 } /* srv_bind() */
 
 /* ------------------------------------------------------------------------- */
@@ -111,24 +105,7 @@ srv_bmove (
   CS_VOID *to,
   CS_INT   cnt
 ) {
-  ASSERT(from);
-  ASSERT(to);
-  ASSERT(cnt >= 0);
-
-#if 0
-
-  /*
-   * XXX FIX
-   *
-   * After running into some odd behavior, it appears the real OpenServer uses
-   * memcpy instead of the safer alternative, memmove. We default the behavior
-   * to match OpenServer but, in the future, we may want to have a compile-time
-   * flag...
-   */
-  memmove((void *) to, (const void *) from, (size_t) cnt);
-#else
-  memcpy((void *) to, (const void *) from, (size_t) cnt);
-#endif
+  return (_srv_bmove(from, to, cnt));
 } /* srv_bmove() */
 
 /* ------------------------------------------------------------------------- */
@@ -138,10 +115,7 @@ srv_bzero (
   CS_VOID *location,
   CS_INT   cnt
 ) {
-  ASSERT(location);
-  ASSERT(cnt >= 0);
-
-  memset((void *) location, 0, (size_t) cnt);
+  return (_srv_bzero(location, cnt));
 } /* srv_bzero() */
 
 /* ------------------------------------------------------------------------- */
@@ -152,7 +126,7 @@ srv_callback (
   CS_INT            callback_type,
   SRV_CALLBACK_FUNC funcp
 ) {
-  return (CS_FAIL);
+  return (_srv_callback(srvproc, callback_type, funcp));
 } /* srv_callback() */
 
 /* ------------------------------------------------------------------------- */
@@ -161,25 +135,7 @@ CS_BOOL CS_PUBLIC
 srv_capability (
   CS_INT capability
 ) {
-  switch (capability)
-  {
-    case SRV_C_DEBUG:
-    case SRV_C_EXIT:
-    case SRV_C_RESUME:
-    case SRV_C_PREEMPT:
-    case SRV_C_SELECT:
-    case SRV_C_SUSPEND:
-    case SRV_C_TIMESLICE:
-#ifdef SRV_POLL
-    case SRV_POLL:
-      {
-#endif /* SRV_POLL */
-      return (CS_TRUE);
-  }
-
-  default:
-    return (CS_FALSE);
-}
+  return (_srv_capability(capability));
 } /* srv_capability() */
 
 /* ------------------------------------------------------------------------- */
@@ -192,7 +148,7 @@ srv_capability_info (
   CS_INT    capability,
   CS_VOID  *val
 ) {
-  return (CS_FAIL);
+  return (_srv_capability_info(spp, cmd, type, capability, val));
 } /* srv_capability_info() */
 
 /* ------------------------------------------------------------------------- */
@@ -202,7 +158,7 @@ srv_charset_set (
   SRV_PROC *srvproc,
   CS_INT    charset
 ) {
-  return (CS_FAIL);
+  return (_srv_charset_set(srvproc, charset));
 } /* srv_charset_set() */
 
 /* ------------------------------------------------------------------------- */
@@ -213,7 +169,7 @@ srv_createmsgq (
   CS_INT     mqlen,
   SRV_OBJID *mqid
 ) {
-  return (CS_FAIL);
+  return (_srv_createmsgq(mqname, mqlen, mqid));
 } /* srv_createmsgq() */
 
 /* ------------------------------------------------------------------------- */
@@ -224,7 +180,7 @@ srv_createmutex (
   CS_INT     mutex_namelen,
   SRV_OBJID *mutex_id
 ) {
-  return (CS_FAIL);
+  return (_srv_createmutex(mutex_name, mutex_namelen, mutex_id));
 } /* srv_createmutex() */
 
 /* ------------------------------------------------------------------------- */
@@ -233,7 +189,7 @@ SRV_PROC *CS_PUBLIC
 srv_createproc (
   SRV_SERVER *server
 ) {
-  return (CS_FAIL);
+  return (_srv_createproc(server));
 } /* srv_createproc() */
 
 /* ------------------------------------------------------------------------- */
@@ -244,7 +200,7 @@ srv_cursor_props (
   CS_INT       cmd,
   SRV_CURDESC *cdp
 ) {
-  return (CS_FAIL);
+  return (_srv_cursor_props(spp, cmd, cdp));
 } /* srv_cursor_props() */
 
 /* ------------------------------------------------------------------------- */
@@ -255,7 +211,7 @@ srv_dbg_stack (
   CS_INT depth,
   CS_RETCODE(CS_PUBLIC *funcp) (CS_CHAR *buf, CS_INT buflen)
 ) {
-  return (CS_FAIL);
+  return (_srv_dbg_stack(srvproc, depth, funcp));
 } /* srv_dbg_stack() */
 
 /* ------------------------------------------------------------------------- */
@@ -264,7 +220,7 @@ int CS_PUBLIC
 srv_dbg_stop (
   void
 ) {
-  return (CS_FAIL);
+  return (_srv_dbg_stop());
 } /* srv_dbg_stop() */
 
 /* ------------------------------------------------------------------------- */
@@ -273,7 +229,7 @@ CS_RETCODE CS_PUBLIC
 srv_dbg_switch (
   CS_INT spid
 ) {
-  return (CS_FAIL);
+  return (_srv_dbg_switch(spid));
 } /* srv_dbg_switch() */
 
 /* ------------------------------------------------------------------------- */
@@ -285,7 +241,7 @@ srv_define_event (
   CS_CHAR    *namep,
   CS_INT      namelen
 ) {
-  return (CS_FAIL);
+  return (_srv_define_event(ssp, type, namep, namelen));
 } /* srv_define_event() */
 
 /* ------------------------------------------------------------------------- */
@@ -296,7 +252,7 @@ srv_deletemsgq (
   CS_INT    length,
   SRV_OBJID id
 ) {
-  return (CS_FAIL);
+  return (_srv_deletemsgq(name, length, id));
 } /* srv_deletemsgq() */
 
 /* ------------------------------------------------------------------------- */
@@ -307,7 +263,7 @@ srv_deletemutex (
   CS_INT    mutex_namelen,
   SRV_OBJID mutex_id
 ) {
-  return (CS_FAIL);
+  return (_srv_deletemutex(mutex_name, mutex_namelen, mutex_id));
 } /* srv_deletemutex() */
 
 /* ------------------------------------------------------------------------- */
@@ -320,7 +276,7 @@ srv_descfmt (
   CS_INT      item,
   CS_DATAFMT *rmtfmtp
 ) {
-  return (CS_FAIL);
+  return (_srv_descfmt(spp, cmd, type, item, rmtfmtp));
 } /* srv_descfmt() */
 
 /* ------------------------------------------------------------------------- */
@@ -329,7 +285,7 @@ CS_INT CS_PUBLIC
 srv_dropproc (
   SRV_PROC *srvproc
 ) {
-  return (CS_FAIL);
+  return (_srv_dropproc(srvproc));
 } /* srv_dropproc() */
 
 /* ------------------------------------------------------------------------- */
@@ -343,7 +299,7 @@ srv_dynamic (
   CS_INT    buflen,
   CS_INT   *outlen
 ) {
-  return (CS_FAIL);
+  return (_srv_dynamic(srvproc, cmd, item, buf, buflen, outlen));
 } /* srv_dynamic() */
 
 /* ------------------------------------------------------------------------- */
@@ -357,7 +313,7 @@ srv_envchange (
   CS_CHAR  *newvalp,
   CS_INT    newvallen
 ) {
-  return (CS_FAIL);
+  return (_srv_envchange(spp, type, oldvalp, oldvallen, newvalp, newvallen));
 } /* srv_envchange() */
 
 /* ------------------------------------------------------------------------- */
@@ -366,7 +322,7 @@ SRV_ERRHANDLE_FUNC CS_PUBLIC
 srv_errhandle (
   SRV_ERRHANDLE_FUNC errhp
 ) {
-  return (CS_FAIL);
+  return (_srv_errhandle(errhp));
 } /* srv_errhandle() */
 
 /* ------------------------------------------------------------------------- */
@@ -377,7 +333,7 @@ srv_event (
   CS_INT    event,
   CS_VOID  *data
 ) {
-  return (CS_FAIL);
+  return (_srv_event(srvproc, event, data));
 } /* srv_event() */
 
 /* ------------------------------------------------------------------------- */
@@ -388,7 +344,7 @@ srv_event_deferred (
   CS_INT    event,
   CS_VOID  *data
 ) {
-  return (CS_FAIL);
+  return (_srv_event_deferred(srvproc, event, data));
 } /* srv_event_deferred() */
 
 /* ------------------------------------------------------------------------- */
@@ -397,12 +353,7 @@ CS_RETCODE CS_PUBLIC
 srv_free (
   CS_VOID *mp
 ) {
-  if (NULL != mp) {
-    free(mp);
-    return (CS_SUCCEED);
-  } else {
-    return (CS_FAIL);
-  }
+  return (_srv_free(mp));
 } /* srv_free() */
 
 /* ------------------------------------------------------------------------- */
@@ -414,7 +365,7 @@ srv_get_text (
   CS_INT    buflen,
   CS_INT   *outlen
 ) {
-  return (CS_FAIL);
+  return (_srv_get_text(spp, buf, buflen, outlen));
 } /* srv_get_text() */
 
 /* ------------------------------------------------------------------------- */
@@ -424,7 +375,7 @@ srv_getloginfo (
   SRV_PROC    *srvproc,
   CS_LOGINFO **loginfo
 ) {
-  return (CS_FAIL);
+  return (_srv_getloginfo(srvproc, loginfo));
 } /* srv_getloginfo() */
 
 /* ------------------------------------------------------------------------- */
@@ -436,7 +387,7 @@ srv_getmsgq (
   CS_INT    flags,
   CS_INT   *info
 ) {
-  return (CS_FAIL);
+  return (_srv_getmsgq(mqid, msgp, flags, info));
 } /* srv_getmsgq() */
 
 /* ------------------------------------------------------------------------- */
@@ -449,7 +400,7 @@ srv_getobjid (
   SRV_OBJID *obj_id,
   CS_INT    *info
 ) {
-  return (CS_FAIL);
+  return (_srv_getobjid(obj_type, obj_name, obj_namelen, obj_id, info));
 } /* srv_getobjid() */
 
 /* ------------------------------------------------------------------------- */
@@ -462,7 +413,7 @@ srv_getobjname (
   CS_INT   *obj_namelen,
   CS_INT   *info
 ) {
-  return (CS_FAIL);
+  return (_srv_getobjname(obj_type, obj_id, obj_name, obj_namelen, info));
 } /* srv_getobjname() */
 
 /* ------------------------------------------------------------------------- */
@@ -473,7 +424,7 @@ srv_handle (
   CS_INT               event,
   SRV_EVENTHANDLE_FUNC eventhp
 ) {
-  return (CS_FAIL);
+  return (_srv_handle(unused, event, eventhp));
 } /* srv_handle() */
 
 /* ------------------------------------------------------------------------- */
@@ -484,10 +435,11 @@ srv_init (
   CS_CHAR    *servername,
   CS_INT      namelen
 ) {
+  return (_srv_init(scp, servername, namelen));
+
   ASSERT(scp);
   ASSERT(servername);
   ASSERT(namelen >= 0);
-  return (CS_FAIL);
 } /* srv_init() */
 
 /* ------------------------------------------------------------------------- */
@@ -499,7 +451,7 @@ srv_langcpy (
   CS_INT    numbytes,
   CS_CHAR  *dest
 ) {
-  return (CS_FAIL);
+  return (_srv_langcpy(srvproc, start, numbytes, dest));
 } /* srv_langcpy() */
 
 /* ------------------------------------------------------------------------- */
@@ -508,7 +460,7 @@ CS_INT CS_PUBLIC
 srv_langlen (
   SRV_PROC *srvproc
 ) {
-  return (CS_FAIL);
+  return (_srv_langlen(srvproc));
 } /* srv_langlen() */
 
 /* ------------------------------------------------------------------------- */
@@ -518,7 +470,7 @@ srv_langptr (
   SRV_PROC *srvproc,
   CS_INT    n
 ) {
-  return (CS_FAIL);
+  return (_srv_langptr(srvproc, n));
 } /* srv_langptr() */
 
 /* ------------------------------------------------------------------------- */
@@ -529,7 +481,7 @@ srv_lockmutex (
   CS_INT    flags,
   CS_INT   *info
 ) {
-  return (CS_FAIL);
+  return (_srv_lockmutex(mutex_id, flags, info));
 } /* srv_lockmutex() */
 
 /* ------------------------------------------------------------------------- */
@@ -541,7 +493,7 @@ srv_log (
   CS_CHAR    *msg,
   CS_INT      msglen
 ) {
-  return (CS_FAIL);
+  return (_srv_log(server, dateflag, msg, msglen));
 } /* srv_log() */
 
 /* ------------------------------------------------------------------------- */
@@ -553,7 +505,7 @@ srv_mask (
   CS_INT          bit,
   CS_BOOL        *info
 ) {
-  return (CS_FAIL);
+  return (_srv_mask(cmd, mp, bit, info));
 } /* srv_mask() */
 
 /* ------------------------------------------------------------------------- */
@@ -565,7 +517,7 @@ srv_msg (
   CS_INT   *msgid,
   CS_INT   *status
 ) {
-  return (CS_FAIL);
+  return (_srv_msg(spp, cmd, msgid, status));
 } /* srv_msg() */
 
 /* ------------------------------------------------------------------------- */
@@ -576,7 +528,7 @@ srv_negotiate (
   CS_INT    cmd,
   CS_INT    type
 ) {
-  return (CS_FAIL);
+  return (_srv_negotiate(spp, cmd, type));
 } /* srv_negotiate() */
 
 /* ------------------------------------------------------------------------- */
@@ -586,7 +538,7 @@ srv_numparams (
   SRV_PROC *spp,
   CS_INT   *numparams
 ) {
-  return (CS_FAIL);
+  return (_srv_numparams(spp, numparams));
 } /* srv_numparams() */
 
 /* ------------------------------------------------------------------------- */
@@ -597,7 +549,7 @@ srv_offset (
   CS_INT    offtype,
   CS_INT    offvalue
 ) {
-  return (CS_FAIL);
+  return (_srv_offset(spp, offtype, offvalue));
 } /* srv_offset() */
 
 /* ------------------------------------------------------------------------- */
@@ -612,7 +564,7 @@ srv_options (
   CS_INT    bufsize,
   CS_INT   *outlen
 ) {
-  return (CS_FAIL);
+  return (_srv_options(srvproc, cmd, optcmd, option, buf, bufsize, outlen));
 } /* srv_options() */
 
 /* ------------------------------------------------------------------------- */
@@ -623,7 +575,7 @@ srv_orderby (
   CS_INT    numcols,
   CS_INT   *collist
 ) {
-  return (CS_FAIL);
+  return (_srv_orderby(spp, numcols, collist));
 } /* srv_orderby() */
 
 /* ------------------------------------------------------------------------- */
@@ -634,7 +586,7 @@ srv_poll (
   CS_INT      nfds,
   CS_INT      waitflag
 ) {
-  return (CS_FAIL);
+  return (_srv_poll(fdp, nfds, waitflag));
 } /* srv_poll() */
 
 /* ------------------------------------------------------------------------- */
@@ -648,7 +600,7 @@ srv_props (
   CS_INT      buflen,
   CS_INT     *outlen
 ) {
-  return (CS_FAIL);
+  return (_srv_props(contextp, cmd, property, buf, buflen, outlen));
 } /* srv_props() */
 
 /* ------------------------------------------------------------------------- */
@@ -659,7 +611,7 @@ srv_putmsgq (
   CS_VOID  *msgp,
   CS_INT    flags
 ) {
-  return (CS_FAIL);
+  return (_srv_putmsgq(mqid, msgp, flags));
 } /* srv_putmsgq() */
 
 /* ------------------------------------------------------------------------- */
@@ -669,7 +621,7 @@ srv_realloc (
   CS_VOID *ptr,
   CS_INT   size
 ) {
-  return (CS_FAIL);
+  return (_srv_realloc(ptr, size));
 } /* srv_realloc() */
 
 /* ------------------------------------------------------------------------- */
@@ -680,7 +632,7 @@ srv_recvpassthru (
   CS_BYTE **recv_bufp,
   CS_INT   *info
 ) {
-  return (CS_FAIL);
+  return (_srv_recvpassthru(srvproc, recv_bufp, info));
 } /* srv_recvpassthru() */
 
 /* ------------------------------------------------------------------------- */
@@ -690,7 +642,7 @@ srv_regcreate (
   SRV_PROC *srvproc,
   CS_INT   *info
 ) {
-  return (CS_FAIL);
+  return (_srv_regcreate(srvproc, info));
 } /* srv_regcreate() */
 
 /* ------------------------------------------------------------------------- */
@@ -702,7 +654,7 @@ srv_regdefine (
   CS_INT               namelen,
   SRV_EVENTHANDLE_FUNC handler
 ) {
-  return (CS_FAIL);
+  return (_srv_regdefine(srvproc, name, namelen, handler));
 } /* srv_regdefine() */
 
 /* ------------------------------------------------------------------------- */
@@ -714,7 +666,7 @@ srv_regdrop (
   CS_INT    namelen,
   CS_INT   *info
 ) {
-  return (CS_FAIL);
+  return (_srv_regdrop(srvproc, proc_name, namelen, info));
 } /* srv_regdrop() */
 
 /* ------------------------------------------------------------------------- */
@@ -724,7 +676,7 @@ srv_regexec (
   SRV_PROC *srvproc,
   CS_INT   *info
 ) {
-  return (CS_FAIL);
+  return (_srv_regexec(srvproc, info));
 } /* srv_regexec() */
 
 /* ------------------------------------------------------------------------- */
@@ -736,7 +688,7 @@ srv_reginit (
   CS_INT    namelen,
   CS_INT    options
 ) {
-  return (CS_FAIL);
+  return (_srv_reginit(srvproc, name, namelen, options));
 } /* srv_reginit() */
 
 /* ------------------------------------------------------------------------- */
@@ -746,7 +698,7 @@ srv_reglist (
   SRV_PROC      *srvproc,
   SRV_PROCLIST **proc_list
 ) {
-  return (CS_FAIL);
+  return (_srv_reglist(srvproc, proc_list));
 } /* srv_reglist() */
 
 /* ------------------------------------------------------------------------- */
@@ -756,7 +708,7 @@ srv_reglistfree (
   SRV_PROC     *srvproc,
   SRV_PROCLIST *proc_list
 ) {
-  return (CS_FAIL);
+  return (_srv_reglistfree(srvproc, proc_list));
 } /* srv_reglistfree() */
 
 /* ------------------------------------------------------------------------- */
@@ -768,7 +720,7 @@ srv_regnowatch (
   CS_INT    namelen,
   CS_INT   *info
 ) {
-  return (CS_FAIL);
+  return (_srv_regnowatch(srvproc, proc_name, namelen, info));
 } /* srv_regnowatch() */
 
 /* ------------------------------------------------------------------------- */
@@ -782,7 +734,7 @@ srv_regparam (
   CS_INT    datalen,
   CS_BYTE  *value
 ) {
-  return (CS_FAIL);
+  return (_srv_regparam(srvproc, paramname, namelen, type, datalen, value));
 } /* srv_regparam() */
 
 /* ------------------------------------------------------------------------- */
@@ -795,7 +747,7 @@ srv_regwatch (
   CS_INT    options,
   CS_INT   *info
 ) {
-  return (CS_FAIL);
+  return (_srv_regwatch(srvproc, proc_name, namelen, options, info));
 } /* srv_regwatch() */
 
 /* ------------------------------------------------------------------------- */
@@ -805,7 +757,7 @@ srv_regwatchlist (
   SRV_PROC      *srvproc,
   SRV_PROCLIST **proc_list
 ) {
-  return (CS_FAIL);
+  return (_srv_regwatchlist(srvproc, proc_list));
 } /* srv_regwatchlist() */
 
 /* ------------------------------------------------------------------------- */
@@ -815,7 +767,7 @@ srv_rpcdb (
   SRV_PROC *srvproc,
   CS_INT   *len
 ) {
-  return (CS_FAIL);
+  return (_srv_rpcdb(srvproc, len));
 } /* srv_rpcdb() */
 
 /* ------------------------------------------------------------------------- */
@@ -825,7 +777,7 @@ srv_rpcname (
   SRV_PROC *srvproc,
   CS_INT   *len
 ) {
-  return (CS_FAIL);
+  return (_srv_rpcname(srvproc, len));
 } /* srv_rpcname() */
 
 /* ------------------------------------------------------------------------- */
@@ -834,7 +786,7 @@ CS_SMALLINT CS_PUBLIC
 srv_rpcnumber (
   SRV_PROC *srvproc
 ) {
-  return (CS_FAIL);
+  return (_srv_rpcnumber(srvproc));
 } /* srv_rpcnumber() */
 
 /* ------------------------------------------------------------------------- */
@@ -843,7 +795,7 @@ CS_INT CS_PUBLIC
 srv_rpcoptions (
   SRV_PROC *srvproc
 ) {
-  return (CS_FAIL);
+  return (_srv_rpcoptions(srvproc));
 } /* srv_rpcoptions() */
 
 /* ------------------------------------------------------------------------- */
@@ -853,7 +805,7 @@ srv_rpcowner (
   SRV_PROC *spp,
   CS_INT   *lenp
 ) {
-  return (CS_FAIL);
+  return (_srv_rpcowner(spp, lenp));
 } /* srv_rpcowner() */
 
 /* ------------------------------------------------------------------------- */
@@ -862,7 +814,7 @@ CS_RETCODE CS_PUBLIC
 srv_run (
   SRV_SERVER *unused
 ) {
-  return (CS_FAIL);
+  return (_srv_run(unused));
 } /* srv_run() */
 
 /* ------------------------------------------------------------------------- */
@@ -875,7 +827,7 @@ srv_select (
   SRV_MASK_ARRAY *exceptmask,
   CS_INT          waitflag
 ) {
-  return (CS_FAIL);
+  return (_srv_select(nfds, readmask, writemask, exceptmask, waitflag));
 } /* srv_select() */
 
 /* ------------------------------------------------------------------------- */
@@ -886,7 +838,7 @@ srv_send_text (
   CS_BYTE  *buf,
   CS_INT    buflen
 ) {
-  return (CS_FAIL);
+  return (_srv_send_text(spp, buf, buflen));
 } /* srv_send_text() */
 
 /* ------------------------------------------------------------------------- */
@@ -898,51 +850,7 @@ srv_senddone (
   CS_INT    transtate,
   CS_INT    count
 ) {
-  ASSERT(srvproc);
-
-  switch (status)
-  {
-    case SRV_DONE_FINAL:
-      {
-      }
-      break;
-
-    case SRV_DONE_MORE:
-      {
-      }
-      break;
-
-    case SRV_DONE_ERROR:
-      {
-      }
-      break;
-
-    case SRV_DONE_COUNT:
-      {
-      }
-      break;
-
-    case SRV_DONE_FLUSH:
-      {
-      }
-      break;
-
-    default:
-      {
-      }
-      break;
-  }
-
-  tds_put_byte(srvproc->tds, TDS_DONE_TOKEN);
-  tds_put_smallint(srvproc->tds, status);
-  tds_put_smallint(srvproc->tds, transtate);
-  if (IS_TDS72_PLUS(srvproc->tds->conn)) {
-    tds_put_int8(srvproc->tds, count);
-  } else {
-    tds_put_int(srvproc->tds, count);
-  }
-
-  return (CS_FAIL);
+  return (_srv_senddone(srvproc, status, transtate, count));
 } /* srv_senddone() */
 
 /* ------------------------------------------------------------------------- */
@@ -953,7 +861,7 @@ srv_sendinfo (
   CS_SERVERMSG *errmsg,
   CS_INT        tran_state
 ) {
-  return (CS_FAIL);
+  return (_srv_sendinfo(spp, errmsg, tran_state));
 } /* srv_sendinfo() */
 
 /* ------------------------------------------------------------------------- */
@@ -964,7 +872,7 @@ srv_sendpassthru (
   CS_BYTE  *send_bufp,
   CS_INT   *info
 ) {
-  return (CS_FAIL);
+  return (_srv_sendpassthru(srvproc, send_bufp, info));
 } /* srv_sendpassthru() */
 
 /* ------------------------------------------------------------------------- */
@@ -974,7 +882,7 @@ srv_sendstatus (
   SRV_PROC *srvproc,
   CS_INT    value
 ) {
-  return (CS_FAIL);
+  return (_srv_sendstatus(srvproc, value));
 } /* srv_sendstatus() */
 
 /* ------------------------------------------------------------------------- */
@@ -986,7 +894,7 @@ srv_setcontrol (
   CS_BYTE  *ctrlinfo,
   CS_INT    ctrllen
 ) {
-  return (CS_FAIL);
+  return (_srv_setcontrol(spp, colnum, ctrlinfo, ctrllen));
 } /* srv_setcontrol() */
 
 /* ------------------------------------------------------------------------- */
@@ -996,7 +904,7 @@ srv_setloginfo (
   SRV_PROC   *srvproc,
   CS_LOGINFO *loginfo
 ) {
-  return (CS_FAIL);
+  return (_srv_setloginfo(srvproc, loginfo));
 } /* srv_setloginfo() */
 
 /* ------------------------------------------------------------------------- */
@@ -1007,7 +915,7 @@ srv_setpri (
   CS_INT    mode,
   CS_INT    priority
 ) {
-  return (CS_FAIL);
+  return (_srv_setpri(srvproc, mode, priority));
 } /* srv_setpri() */
 
 /* ------------------------------------------------------------------------- */
@@ -1016,7 +924,7 @@ CS_RETCODE CS_PUBLIC
 srv_sigdump (
   CS_INT sig
 ) {
-  return (CS_FAIL);
+  return (_srv_sigdump(sig));
 } /* srv_sigdump() */
 
 /* ------------------------------------------------------------------------- */
@@ -1026,7 +934,7 @@ srv_signal (
   CS_INT          sig,
   SRV_SIGNAL_FUNC funcp
 ) {
-  return (CS_FAIL);
+  return (_srv_signal(sig, funcp));
 } /* srv_signal() */
 
 /* ------------------------------------------------------------------------- */
@@ -1040,7 +948,8 @@ srv_sleep (
   CS_VOID *reserved1,
   CS_VOID *reserved2
 ) {
-  return (CS_FAIL);
+  return (_srv_sleep(sleepevent, sleeplabel, sleepflags, info, reserved1,
+         reserved2));
 } /* srv_sleep() */
 
 /* ------------------------------------------------------------------------- */
@@ -1053,7 +962,7 @@ srv_spawn (
   CS_VOID               *argp,
   CS_INT                 priority
 ) {
-  return (CS_FAIL);
+  return (_srv_spawn(srvproc, stacksize, funcp, argp, priority));
 } /* srv_spawn() */
 
 /* ------------------------------------------------------------------------- */
@@ -1064,7 +973,7 @@ srv_symbol (
   CS_INT  symbol,
   CS_INT *len
 ) {
-  return (CS_FAIL);
+  return (_srv_symbol(type, symbol, len));
 } /* srv_symbol() */
 
 /* ------------------------------------------------------------------------- */
@@ -1075,7 +984,7 @@ srv_tabcolname (
   CS_INT         colnum,
   CS_BROWSEDESC *bd
 ) {
-  return (CS_FAIL);
+  return (_srv_tabcolname(spp, colnum, bd));
 } /* srv_tabcolname() */
 
 /* ------------------------------------------------------------------------- */
@@ -1087,7 +996,7 @@ srv_tabname (
   CS_CHAR  *tablename,
   CS_INT    namelen
 ) {
-  return (CS_FAIL);
+  return (_srv_tabname(spp, tablenum, tablename, namelen));
 } /* srv_tabname() */
 
 /* ------------------------------------------------------------------------- */
@@ -1096,7 +1005,7 @@ CS_RETCODE CS_PUBLIC
 srv_termproc (
   SRV_PROC *srvproc
 ) {
-  return (CS_FAIL);
+  return (_srv_termproc(srvproc));
 } /* srv_termproc() */
 
 /* ------------------------------------------------------------------------- */
@@ -1108,7 +1017,7 @@ srv_text_info (
   CS_INT     item,
   CS_IODESC *iodesc
 ) {
-  return (CS_FAIL);
+  return (_srv_text_info(spp, cmd, item, iodesc));
 } /* srv_text_info() */
 
 /* ------------------------------------------------------------------------- */
@@ -1122,72 +1031,7 @@ srv_thread_props (
   CS_INT    buflen,
   CS_INT   *outlen
 ) {
-#if 0
-  SRV_T_APPLNAME
-  SRV_T_BYTEORDER
-  SRV_T_BULKTYPE
-  SRV_T_BYTEORDER
-  SRV_T_CHARTYPE
-  SRV_T_CLIB
-  SRV_T_CLIBVERS
-  SRV_T_CLIENTLOGOUT
-  SRV_T_CONVERTSHORT
-  SRV_T_DUMPLOAD
-  SRV_T_ENDPOINT
-  SRV_T_EVENT
-  SRV_T_EVENTDATA
-  SRV_T_FLTTYPE
-  SRV_T_GOTATTENTION
-  SRV_T_HOSTNAME
-  SRV_T_HOSTPROCID
-  SRV_T_IODEAD
-  SRV_T_LISTENADDR
-  SRV_T_LOCALE
-  SRV_T_LOCALID
-  SRV_T_LOGINTYPE
-  SRV_T_MACHINE
-  SRV_T_MIGRATED
-  SRV_T_MIGRATE_STATE
-  SRV_T_NEGLOGIN
-  SRV_T_NOTIFYCHARSET
-  SRV_T_NOTIFYDB
-  SRV_T_NOTIFYLANG
-  SRV_T_NOTIFYPND
-  SRV_T_NUMRMTPWDS
-  SRV_T_PACKETSIZE
-  SRV_T_PASSTHRU
-  SRV_T_PRIORITY
-  SRV_T_PWD
-  SRV_T_REMOTEADDR
-  SRV_T_RETPARMS
-  SRV_T_RMTPWDS
-  SRV_T_RMTSERVER
-  SRV_T_ROWSENT
-  SRV_T_SEC_CHANBIND
-  SRV_T_SEC_CONFIDENTIALITY
-  SRV_T_SEC_CREDTIMEOUT
-  SRV_T_SEC_DATAORIGIN
-  SRV_T_SEC_DELEGATION
-  SRV_T_SEC_DELEGCRED
-  SRV_T_SEC_DETECTREPLAY
-  SRV_T_SEC_DETECTSEQ
-  SRV_T_SEC_INTEGRITY
-  SRV_T_SEC_MECHANISM
-  SRV_T_SEC_MUTUALAUTH
-  SRV_T_SEC_NETWORKAUTH
-  SRV_T_SEC_SESSTIMEOUT
-  SRV_T_SESSIONID
-  SRV_T_SPID
-  SRV_T_STACKLEFT
-  SRV_T_TDSVERSION
-  SRV_T_TYPE
-  SRV_T_USER
-  SRV_T_USERDATA
-  SRV_T_USERVLANG
-    SRV_T_USTATE
-#endif
-
-  return (CS_FAIL);
+  return (_srv_thread_props(spp, cmd, property, buf, buflen, outlen));
 } /* srv_thread_props() */
 
 /* ------------------------------------------------------------------------- */
@@ -1197,7 +1041,7 @@ srv_ucwakeup (
   SRV_PROC *srvproc,
   CS_INT    wakeflags
 ) {
-  return (CS_FAIL);
+  return (_srv_ucwakeup(srvproc, wakeflags));
 } /* srv_ucwakeup() */
 
 /* ------------------------------------------------------------------------- */
@@ -1206,7 +1050,7 @@ CS_RETCODE CS_PUBLIC
 srv_unlockmutex (
   SRV_OBJID mutex_id
 ) {
-  return (CS_FAIL);
+  return (_srv_unlockmutex(mutex_id));
 } /* srv_unlockmutex() */
 
 /* ------------------------------------------------------------------------- */
@@ -1216,22 +1060,7 @@ srv_version (
   CS_CONTEXT *cp,
   CS_INT      version
 ) {
-  switch (version)
-  {
-#ifdef CS_VERSION_100
-    case CS_VERSION_100:
-#endif /* CS_VERSION_100 */
-#ifdef CS_VERSION_110
-    case CS_VERSION_110:
-      {
-#endif /* CS_VERSION_110 */
-  }
-  break;
-
-  default:
-    return (CS_FAIL);
-}
-return (CS_FAIL);
+  return (_srv_version(cp, version));
 } /* srv_version() */
 
 /* ------------------------------------------------------------------------- */
@@ -1243,7 +1072,7 @@ srv_wakeup (
   CS_VOID *reserved1,
   CS_VOID *reserved2
 ) {
-  return (CS_FAIL);
+  return (_srv_wakeup(sleepevent, wakeflags, reserved1, reserved2));
 } /* srv_wakeup() */
 
 /* ------------------------------------------------------------------------- */
@@ -1254,171 +1083,7 @@ srv_xferdata (
   CS_INT    cmd,
   CS_INT    type
 ) {
-  switch (type)
-  {
-    case SRV_RPCDATA: /* RPC parameter */
-      {
-        switch (cmd)
-        {
-          case CS_GET:
-            {
-            }
-            break;
-
-          case CS_SET:
-            {
-            }
-            break;
-
-          default:
-            return (CS_FAIL);
-        }
-      }
-      break;
-
-    case SRV_ROWDATA: /* Result row column */
-      {
-        switch (cmd)
-        {
-          case CS_SET:
-            {
-            }
-            break;
-
-          case CS_GET: /* fallthrough */
-          default:
-            return (CS_FAIL);
-        }
-      }
-      break;
-
-    case SRV_CURDATA: /* Cursor parameter */
-      {
-        switch (cmd)
-        {
-          case CS_GET:
-            {
-            }
-            break;
-
-          case CS_SET: /* fallthrough */
-          default:
-            return (CS_FAIL);
-        }
-      }
-      break;
-
-    case SRV_KEYDATA: /* Cursor key column */
-      {
-        switch (cmd)
-        {
-          case CS_GET:
-            {
-            }
-            break;
-
-          case CS_SET: /* fallthrough */
-          default:
-            return (CS_FAIL);
-        }
-      }
-      break;
-
-    case SRV_ERRORDATA: /* Error message parameter */
-      {
-        switch (cmd)
-        {
-          case CS_SET:
-            {
-            }
-            break;
-
-          case CS_GET: /* fallthrough */
-          default:
-            return (CS_FAIL);
-        }
-      }
-      break;
-
-    case SRV_DYNDATA: /* Dynamic SQL parameter */
-      {
-        switch (cmd)
-        {
-          case CS_GET:
-            {
-            }
-            break;
-
-          case CS_SET:
-            {
-            }
-            break;
-
-          default:
-            return (CS_FAIL);
-        }
-      }
-      break;
-
-    case SRV_NEGDATA: /* Negotiated login parameter */
-      {
-        switch (cmd)
-        {
-          case CS_GET:
-            {
-            }
-            break;
-
-          case CS_SET:
-            {
-            }
-            break;
-
-          default:
-            return (CS_FAIL);
-        }
-      }
-      break;
-
-    case SRV_MSGDATA: /* Message parameter */
-      {
-        switch (cmd)
-        {
-          case CS_GET:
-            {
-            }
-            break;
-
-          case CS_SET:
-            {
-            }
-            break;
-
-          default:
-            return (CS_FAIL);
-        }
-      }
-      break;
-
-    case SRV_LANGDATA: /* Language parameter */
-      {
-        switch (cmd)
-        {
-          case CS_GET:
-            {
-            }
-            break;
-
-          case CS_SET: /* fallthrough */
-          default:
-            return (CS_FAIL);
-        }
-      }
-
-    default:
-      return (CS_FAIL);
-  }
-  return (CS_FAIL);
+  return (_srv_xferdata(spp, cmd, type));
 } /* srv_xferdata() */
 
 /* ------------------------------------------------------------------------- */
@@ -1427,7 +1092,7 @@ CS_RETCODE CS_PUBLIC
 srv_yield (
   void
 ) {
-  return (CS_FAIL);
+  return (_srv_yield());
 } /* srv_yield() */
 
 /* :vi set ts=2 et sw=2: */
