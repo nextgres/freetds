@@ -17,7 +17,7 @@ CS_VOID * CS_PUBLIC
 srv_alloc (
   CS_INT size
 ) {
-  return (_srv_alloc(size));
+  return (freetds_srv_alloc(size));
 } /* srv_alloc() */
 
 /* ------------------------------------------------------------------------- */
@@ -32,7 +32,8 @@ srv_alt_bind (
   CS_INT      *varlenp,
   CS_SMALLINT *indp
 ) {
-  return (_srv_alt_bind(spp, altid, item, lclfmtp, varaddrp, varlenp, indp));
+  return (freetds_srv_alt_bind(spp, altid, item, lclfmtp, varaddrp, varlenp,
+    indp));
 } /* srv_alt_bind() */
 
 /* ------------------------------------------------------------------------- */
@@ -46,7 +47,7 @@ srv_alt_descfmt (
   CS_INT      item,
   CS_DATAFMT *rmtfmtp
 ) {
-  return (_srv_alt_descfmt(spp, altid, optype, operand, item, rmtfmtp));
+  return (freetds_srv_alt_descfmt(spp, altid, optype, operand, item, rmtfmtp));
 } /* srv_alt_descfmt() */
 
 /* ------------------------------------------------------------------------- */
@@ -56,7 +57,7 @@ srv_alt_exist (
   SRV_PROC *spp,
   CS_INT    altid
 ) {
-  return (_srv_alt_exist(spp, altid));
+  return (freetds_srv_alt_exist(spp, altid));
 } /* srv_alt_exist() */
 
 /* ------------------------------------------------------------------------- */
@@ -68,7 +69,7 @@ srv_alt_header (
   CS_INT       numbylist,
   CS_SMALLINT *bylistarray
 ) {
-  return (_srv_alt_header(spp, altid, numbylist, bylistarray));
+  return (freetds_srv_alt_header(spp, altid, numbylist, bylistarray));
 } /* srv_alt_header() */
 
 /* ------------------------------------------------------------------------- */
@@ -78,7 +79,7 @@ srv_alt_xferdata (
   SRV_PROC *spp,
   CS_INT    altid
 ) {
-  return (_srv_alt_xferdata(spp, altid));
+  return (freetds_srv_alt_xferdata(spp, altid));
 } /* srv_alt_xferdata() */
 
 /* ------------------------------------------------------------------------- */
@@ -94,7 +95,8 @@ srv_bind (
   CS_INT      *varlenp,
   CS_SMALLINT *indp
 ) {
-  return (_srv_bind(spp, cmd, type, item, lclfmtp, varaddrp, varlenp, indp));
+  return (freetds_srv_bind(spp, cmd, type, item, lclfmtp, varaddrp, varlenp,
+    indp));
 } /* srv_bind() */
 
 /* ------------------------------------------------------------------------- */
@@ -105,7 +107,7 @@ srv_bmove (
   CS_VOID *to,
   CS_INT   cnt
 ) {
-  return (_srv_bmove(from, to, cnt));
+  return (freetds_srv_bmove(from, to, cnt));
 } /* srv_bmove() */
 
 /* ------------------------------------------------------------------------- */
@@ -115,7 +117,7 @@ srv_bzero (
   CS_VOID *location,
   CS_INT   cnt
 ) {
-  return (_srv_bzero(location, cnt));
+  return (freetds_srv_bzero(location, cnt));
 } /* srv_bzero() */
 
 /* ------------------------------------------------------------------------- */
@@ -126,7 +128,7 @@ srv_callback (
   CS_INT            callback_type,
   SRV_CALLBACK_FUNC funcp
 ) {
-  return (_srv_callback(srvproc, callback_type, funcp));
+  return (freetds_srv_callback(srvproc, callback_type, funcp));
 } /* srv_callback() */
 
 /* ------------------------------------------------------------------------- */
@@ -135,7 +137,7 @@ CS_BOOL CS_PUBLIC
 srv_capability (
   CS_INT capability
 ) {
-  return (_srv_capability(capability));
+  return (freetds_srv_capability(capability));
 } /* srv_capability() */
 
 /* ------------------------------------------------------------------------- */
@@ -148,7 +150,7 @@ srv_capability_info (
   CS_INT    capability,
   CS_VOID  *val
 ) {
-  return (_srv_capability_info(spp, cmd, type, capability, val));
+  return (freetds_srv_capability_info(spp, cmd, type, capability, val));
 } /* srv_capability_info() */
 
 /* ------------------------------------------------------------------------- */
@@ -158,7 +160,7 @@ srv_charset_set (
   SRV_PROC *srvproc,
   CS_INT    charset
 ) {
-  return (_srv_charset_set(srvproc, charset));
+  return (freetds_srv_charset_set(srvproc, charset));
 } /* srv_charset_set() */
 
 /* ------------------------------------------------------------------------- */
@@ -169,7 +171,7 @@ srv_createmsgq (
   CS_INT     mqlen,
   SRV_OBJID *mqid
 ) {
-  return (_srv_createmsgq(mqname, mqlen, mqid));
+  return (freetds_srv_createmsgq(mqname, mqlen, mqid));
 } /* srv_createmsgq() */
 
 /* ------------------------------------------------------------------------- */
@@ -180,7 +182,7 @@ srv_createmutex (
   CS_INT     mutex_namelen,
   SRV_OBJID *mutex_id
 ) {
-  return (_srv_createmutex(mutex_name, mutex_namelen, mutex_id));
+  return (freetds_srv_createmutex(mutex_name, mutex_namelen, mutex_id));
 } /* srv_createmutex() */
 
 /* ------------------------------------------------------------------------- */
@@ -189,7 +191,7 @@ SRV_PROC *CS_PUBLIC
 srv_createproc (
   SRV_SERVER *server
 ) {
-  return (_srv_createproc(server));
+  return (freetds_srv_createproc(server));
 } /* srv_createproc() */
 
 /* ------------------------------------------------------------------------- */
@@ -200,7 +202,7 @@ srv_cursor_props (
   CS_INT       cmd,
   SRV_CURDESC *cdp
 ) {
-  return (_srv_cursor_props(spp, cmd, cdp));
+  return (freetds_srv_cursor_props(spp, cmd, cdp));
 } /* srv_cursor_props() */
 
 /* ------------------------------------------------------------------------- */
@@ -211,7 +213,7 @@ srv_dbg_stack (
   CS_INT depth,
   CS_RETCODE(CS_PUBLIC *funcp) (CS_CHAR *buf, CS_INT buflen)
 ) {
-  return (_srv_dbg_stack(srvproc, depth, funcp));
+  return (freetds_srv_dbg_stack(srvproc, depth, funcp));
 } /* srv_dbg_stack() */
 
 /* ------------------------------------------------------------------------- */
@@ -220,7 +222,7 @@ int CS_PUBLIC
 srv_dbg_stop (
   void
 ) {
-  return (_srv_dbg_stop());
+  return (freetds_srv_dbg_stop());
 } /* srv_dbg_stop() */
 
 /* ------------------------------------------------------------------------- */
@@ -229,7 +231,7 @@ CS_RETCODE CS_PUBLIC
 srv_dbg_switch (
   CS_INT spid
 ) {
-  return (_srv_dbg_switch(spid));
+  return (freetds_srv_dbg_switch(spid));
 } /* srv_dbg_switch() */
 
 /* ------------------------------------------------------------------------- */
@@ -241,7 +243,7 @@ srv_define_event (
   CS_CHAR    *namep,
   CS_INT      namelen
 ) {
-  return (_srv_define_event(ssp, type, namep, namelen));
+  return (freetds_srv_define_event(ssp, type, namep, namelen));
 } /* srv_define_event() */
 
 /* ------------------------------------------------------------------------- */
@@ -252,7 +254,7 @@ srv_deletemsgq (
   CS_INT    length,
   SRV_OBJID id
 ) {
-  return (_srv_deletemsgq(name, length, id));
+  return (freetds_srv_deletemsgq(name, length, id));
 } /* srv_deletemsgq() */
 
 /* ------------------------------------------------------------------------- */
@@ -263,7 +265,7 @@ srv_deletemutex (
   CS_INT    mutex_namelen,
   SRV_OBJID mutex_id
 ) {
-  return (_srv_deletemutex(mutex_name, mutex_namelen, mutex_id));
+  return (freetds_srv_deletemutex(mutex_name, mutex_namelen, mutex_id));
 } /* srv_deletemutex() */
 
 /* ------------------------------------------------------------------------- */
@@ -276,7 +278,7 @@ srv_descfmt (
   CS_INT      item,
   CS_DATAFMT *rmtfmtp
 ) {
-  return (_srv_descfmt(spp, cmd, type, item, rmtfmtp));
+  return (freetds_srv_descfmt(spp, cmd, type, item, rmtfmtp));
 } /* srv_descfmt() */
 
 /* ------------------------------------------------------------------------- */
@@ -285,7 +287,7 @@ CS_INT CS_PUBLIC
 srv_dropproc (
   SRV_PROC *srvproc
 ) {
-  return (_srv_dropproc(srvproc));
+  return (freetds_srv_dropproc(srvproc));
 } /* srv_dropproc() */
 
 /* ------------------------------------------------------------------------- */
@@ -299,7 +301,7 @@ srv_dynamic (
   CS_INT    buflen,
   CS_INT   *outlen
 ) {
-  return (_srv_dynamic(srvproc, cmd, item, buf, buflen, outlen));
+  return (freetds_srv_dynamic(srvproc, cmd, item, buf, buflen, outlen));
 } /* srv_dynamic() */
 
 /* ------------------------------------------------------------------------- */
@@ -313,7 +315,8 @@ srv_envchange (
   CS_CHAR  *newvalp,
   CS_INT    newvallen
 ) {
-  return (_srv_envchange(spp, type, oldvalp, oldvallen, newvalp, newvallen));
+  return (freetds_srv_envchange(spp, type, oldvalp, oldvallen, newvalp,
+    newvallen));
 } /* srv_envchange() */
 
 /* ------------------------------------------------------------------------- */
@@ -322,7 +325,7 @@ SRV_ERRHANDLE_FUNC CS_PUBLIC
 srv_errhandle (
   SRV_ERRHANDLE_FUNC errhp
 ) {
-  return (_srv_errhandle(errhp));
+  return (freetds_srv_errhandle(errhp));
 } /* srv_errhandle() */
 
 /* ------------------------------------------------------------------------- */
@@ -333,7 +336,7 @@ srv_event (
   CS_INT    event,
   CS_VOID  *data
 ) {
-  return (_srv_event(srvproc, event, data));
+  return (freetds_srv_event(srvproc, event, data));
 } /* srv_event() */
 
 /* ------------------------------------------------------------------------- */
@@ -344,7 +347,7 @@ srv_event_deferred (
   CS_INT    event,
   CS_VOID  *data
 ) {
-  return (_srv_event_deferred(srvproc, event, data));
+  return (freetds_srv_event_deferred(srvproc, event, data));
 } /* srv_event_deferred() */
 
 /* ------------------------------------------------------------------------- */
@@ -353,7 +356,7 @@ CS_RETCODE CS_PUBLIC
 srv_free (
   CS_VOID *mp
 ) {
-  return (_srv_free(mp));
+  return (freetds_srv_free(mp));
 } /* srv_free() */
 
 /* ------------------------------------------------------------------------- */
@@ -365,7 +368,7 @@ srv_get_text (
   CS_INT    buflen,
   CS_INT   *outlen
 ) {
-  return (_srv_get_text(spp, buf, buflen, outlen));
+  return (freetds_srv_get_text(spp, buf, buflen, outlen));
 } /* srv_get_text() */
 
 /* ------------------------------------------------------------------------- */
@@ -375,7 +378,7 @@ srv_getloginfo (
   SRV_PROC    *srvproc,
   CS_LOGINFO **loginfo
 ) {
-  return (_srv_getloginfo(srvproc, loginfo));
+  return (freetds_srv_getloginfo(srvproc, loginfo));
 } /* srv_getloginfo() */
 
 /* ------------------------------------------------------------------------- */
@@ -387,7 +390,7 @@ srv_getmsgq (
   CS_INT    flags,
   CS_INT   *info
 ) {
-  return (_srv_getmsgq(mqid, msgp, flags, info));
+  return (freetds_srv_getmsgq(mqid, msgp, flags, info));
 } /* srv_getmsgq() */
 
 /* ------------------------------------------------------------------------- */
@@ -400,7 +403,7 @@ srv_getobjid (
   SRV_OBJID *obj_id,
   CS_INT    *info
 ) {
-  return (_srv_getobjid(obj_type, obj_name, obj_namelen, obj_id, info));
+  return (freetds_srv_getobjid(obj_type, obj_name, obj_namelen, obj_id, info));
 } /* srv_getobjid() */
 
 /* ------------------------------------------------------------------------- */
@@ -413,7 +416,8 @@ srv_getobjname (
   CS_INT   *obj_namelen,
   CS_INT   *info
 ) {
-  return (_srv_getobjname(obj_type, obj_id, obj_name, obj_namelen, info));
+  return (freetds_srv_getobjname(obj_type, obj_id, obj_name, obj_namelen,
+    info));
 } /* srv_getobjname() */
 
 /* ------------------------------------------------------------------------- */
@@ -424,7 +428,7 @@ srv_handle (
   CS_INT               event,
   SRV_EVENTHANDLE_FUNC eventhp
 ) {
-  return (_srv_handle(unused, event, eventhp));
+  return (freetds_srv_handle(unused, event, eventhp));
 } /* srv_handle() */
 
 /* ------------------------------------------------------------------------- */
@@ -435,7 +439,7 @@ srv_init (
   CS_CHAR    *servername,
   CS_INT      namelen
 ) {
-  return (_srv_init(scp, servername, namelen));
+  return (freetds_srv_init(scp, servername, namelen));
 
   ASSERT(scp);
   ASSERT(servername);
@@ -451,7 +455,7 @@ srv_langcpy (
   CS_INT    numbytes,
   CS_CHAR  *dest
 ) {
-  return (_srv_langcpy(srvproc, start, numbytes, dest));
+  return (freetds_srv_langcpy(srvproc, start, numbytes, dest));
 } /* srv_langcpy() */
 
 /* ------------------------------------------------------------------------- */
@@ -460,7 +464,7 @@ CS_INT CS_PUBLIC
 srv_langlen (
   SRV_PROC *srvproc
 ) {
-  return (_srv_langlen(srvproc));
+  return (freetds_srv_langlen(srvproc));
 } /* srv_langlen() */
 
 /* ------------------------------------------------------------------------- */
@@ -470,7 +474,7 @@ srv_langptr (
   SRV_PROC *srvproc,
   CS_INT    n
 ) {
-  return (_srv_langptr(srvproc, n));
+  return (freetds_srv_langptr(srvproc, n));
 } /* srv_langptr() */
 
 /* ------------------------------------------------------------------------- */
@@ -481,7 +485,7 @@ srv_lockmutex (
   CS_INT    flags,
   CS_INT   *info
 ) {
-  return (_srv_lockmutex(mutex_id, flags, info));
+  return (freetds_srv_lockmutex(mutex_id, flags, info));
 } /* srv_lockmutex() */
 
 /* ------------------------------------------------------------------------- */
@@ -493,7 +497,7 @@ srv_log (
   CS_CHAR    *msg,
   CS_INT      msglen
 ) {
-  return (_srv_log(server, dateflag, msg, msglen));
+  return (freetds_srv_log(server, dateflag, msg, msglen));
 } /* srv_log() */
 
 /* ------------------------------------------------------------------------- */
@@ -505,7 +509,7 @@ srv_mask (
   CS_INT          bit,
   CS_BOOL        *info
 ) {
-  return (_srv_mask(cmd, mp, bit, info));
+  return (freetds_srv_mask(cmd, mp, bit, info));
 } /* srv_mask() */
 
 /* ------------------------------------------------------------------------- */
@@ -517,7 +521,7 @@ srv_msg (
   CS_INT   *msgid,
   CS_INT   *status
 ) {
-  return (_srv_msg(spp, cmd, msgid, status));
+  return (freetds_srv_msg(spp, cmd, msgid, status));
 } /* srv_msg() */
 
 /* ------------------------------------------------------------------------- */
@@ -528,7 +532,7 @@ srv_negotiate (
   CS_INT    cmd,
   CS_INT    type
 ) {
-  return (_srv_negotiate(spp, cmd, type));
+  return (freetds_srv_negotiate(spp, cmd, type));
 } /* srv_negotiate() */
 
 /* ------------------------------------------------------------------------- */
@@ -538,7 +542,7 @@ srv_numparams (
   SRV_PROC *spp,
   CS_INT   *numparams
 ) {
-  return (_srv_numparams(spp, numparams));
+  return (freetds_srv_numparams(spp, numparams));
 } /* srv_numparams() */
 
 /* ------------------------------------------------------------------------- */
@@ -549,7 +553,7 @@ srv_offset (
   CS_INT    offtype,
   CS_INT    offvalue
 ) {
-  return (_srv_offset(spp, offtype, offvalue));
+  return (freetds_srv_offset(spp, offtype, offvalue));
 } /* srv_offset() */
 
 /* ------------------------------------------------------------------------- */
@@ -564,7 +568,8 @@ srv_options (
   CS_INT    bufsize,
   CS_INT   *outlen
 ) {
-  return (_srv_options(srvproc, cmd, optcmd, option, buf, bufsize, outlen));
+  return (freetds_srv_options(srvproc, cmd, optcmd, option, buf, bufsize,
+    outlen));
 } /* srv_options() */
 
 /* ------------------------------------------------------------------------- */
@@ -575,7 +580,7 @@ srv_orderby (
   CS_INT    numcols,
   CS_INT   *collist
 ) {
-  return (_srv_orderby(spp, numcols, collist));
+  return (freetds_srv_orderby(spp, numcols, collist));
 } /* srv_orderby() */
 
 /* ------------------------------------------------------------------------- */
@@ -586,7 +591,7 @@ srv_poll (
   CS_INT      nfds,
   CS_INT      waitflag
 ) {
-  return (_srv_poll(fdp, nfds, waitflag));
+  return (freetds_srv_poll(fdp, nfds, waitflag));
 } /* srv_poll() */
 
 /* ------------------------------------------------------------------------- */
@@ -600,7 +605,7 @@ srv_props (
   CS_INT      buflen,
   CS_INT     *outlen
 ) {
-  return (_srv_props(contextp, cmd, property, buf, buflen, outlen));
+  return (freetds_srv_props(contextp, cmd, property, buf, buflen, outlen));
 } /* srv_props() */
 
 /* ------------------------------------------------------------------------- */
@@ -611,7 +616,7 @@ srv_putmsgq (
   CS_VOID  *msgp,
   CS_INT    flags
 ) {
-  return (_srv_putmsgq(mqid, msgp, flags));
+  return (freetds_srv_putmsgq(mqid, msgp, flags));
 } /* srv_putmsgq() */
 
 /* ------------------------------------------------------------------------- */
@@ -621,7 +626,7 @@ srv_realloc (
   CS_VOID *ptr,
   CS_INT   size
 ) {
-  return (_srv_realloc(ptr, size));
+  return (freetds_srv_realloc(ptr, size));
 } /* srv_realloc() */
 
 /* ------------------------------------------------------------------------- */
@@ -632,7 +637,7 @@ srv_recvpassthru (
   CS_BYTE **recv_bufp,
   CS_INT   *info
 ) {
-  return (_srv_recvpassthru(srvproc, recv_bufp, info));
+  return (freetds_srv_recvpassthru(srvproc, recv_bufp, info));
 } /* srv_recvpassthru() */
 
 /* ------------------------------------------------------------------------- */
@@ -642,7 +647,7 @@ srv_regcreate (
   SRV_PROC *srvproc,
   CS_INT   *info
 ) {
-  return (_srv_regcreate(srvproc, info));
+  return (freetds_srv_regcreate(srvproc, info));
 } /* srv_regcreate() */
 
 /* ------------------------------------------------------------------------- */
@@ -654,7 +659,7 @@ srv_regdefine (
   CS_INT               namelen,
   SRV_EVENTHANDLE_FUNC handler
 ) {
-  return (_srv_regdefine(srvproc, name, namelen, handler));
+  return (freetds_srv_regdefine(srvproc, name, namelen, handler));
 } /* srv_regdefine() */
 
 /* ------------------------------------------------------------------------- */
@@ -666,7 +671,7 @@ srv_regdrop (
   CS_INT    namelen,
   CS_INT   *info
 ) {
-  return (_srv_regdrop(srvproc, proc_name, namelen, info));
+  return (freetds_srv_regdrop(srvproc, proc_name, namelen, info));
 } /* srv_regdrop() */
 
 /* ------------------------------------------------------------------------- */
@@ -676,7 +681,7 @@ srv_regexec (
   SRV_PROC *srvproc,
   CS_INT   *info
 ) {
-  return (_srv_regexec(srvproc, info));
+  return (freetds_srv_regexec(srvproc, info));
 } /* srv_regexec() */
 
 /* ------------------------------------------------------------------------- */
@@ -688,7 +693,7 @@ srv_reginit (
   CS_INT    namelen,
   CS_INT    options
 ) {
-  return (_srv_reginit(srvproc, name, namelen, options));
+  return (freetds_srv_reginit(srvproc, name, namelen, options));
 } /* srv_reginit() */
 
 /* ------------------------------------------------------------------------- */
@@ -698,7 +703,7 @@ srv_reglist (
   SRV_PROC      *srvproc,
   SRV_PROCLIST **proc_list
 ) {
-  return (_srv_reglist(srvproc, proc_list));
+  return (freetds_srv_reglist(srvproc, proc_list));
 } /* srv_reglist() */
 
 /* ------------------------------------------------------------------------- */
@@ -708,7 +713,7 @@ srv_reglistfree (
   SRV_PROC     *srvproc,
   SRV_PROCLIST *proc_list
 ) {
-  return (_srv_reglistfree(srvproc, proc_list));
+  return (freetds_srv_reglistfree(srvproc, proc_list));
 } /* srv_reglistfree() */
 
 /* ------------------------------------------------------------------------- */
@@ -720,7 +725,7 @@ srv_regnowatch (
   CS_INT    namelen,
   CS_INT   *info
 ) {
-  return (_srv_regnowatch(srvproc, proc_name, namelen, info));
+  return (freetds_srv_regnowatch(srvproc, proc_name, namelen, info));
 } /* srv_regnowatch() */
 
 /* ------------------------------------------------------------------------- */
@@ -734,7 +739,8 @@ srv_regparam (
   CS_INT    datalen,
   CS_BYTE  *value
 ) {
-  return (_srv_regparam(srvproc, paramname, namelen, type, datalen, value));
+  return (freetds_srv_regparam(srvproc, paramname, namelen, type, datalen,
+    value));
 } /* srv_regparam() */
 
 /* ------------------------------------------------------------------------- */
@@ -747,7 +753,7 @@ srv_regwatch (
   CS_INT    options,
   CS_INT   *info
 ) {
-  return (_srv_regwatch(srvproc, proc_name, namelen, options, info));
+  return (freetds_srv_regwatch(srvproc, proc_name, namelen, options, info));
 } /* srv_regwatch() */
 
 /* ------------------------------------------------------------------------- */
@@ -757,7 +763,7 @@ srv_regwatchlist (
   SRV_PROC      *srvproc,
   SRV_PROCLIST **proc_list
 ) {
-  return (_srv_regwatchlist(srvproc, proc_list));
+  return (freetds_srv_regwatchlist(srvproc, proc_list));
 } /* srv_regwatchlist() */
 
 /* ------------------------------------------------------------------------- */
@@ -767,7 +773,7 @@ srv_rpcdb (
   SRV_PROC *srvproc,
   CS_INT   *len
 ) {
-  return (_srv_rpcdb(srvproc, len));
+  return (freetds_srv_rpcdb(srvproc, len));
 } /* srv_rpcdb() */
 
 /* ------------------------------------------------------------------------- */
@@ -777,7 +783,7 @@ srv_rpcname (
   SRV_PROC *srvproc,
   CS_INT   *len
 ) {
-  return (_srv_rpcname(srvproc, len));
+  return (freetds_srv_rpcname(srvproc, len));
 } /* srv_rpcname() */
 
 /* ------------------------------------------------------------------------- */
@@ -786,7 +792,7 @@ CS_SMALLINT CS_PUBLIC
 srv_rpcnumber (
   SRV_PROC *srvproc
 ) {
-  return (_srv_rpcnumber(srvproc));
+  return (freetds_srv_rpcnumber(srvproc));
 } /* srv_rpcnumber() */
 
 /* ------------------------------------------------------------------------- */
@@ -795,7 +801,7 @@ CS_INT CS_PUBLIC
 srv_rpcoptions (
   SRV_PROC *srvproc
 ) {
-  return (_srv_rpcoptions(srvproc));
+  return (freetds_srv_rpcoptions(srvproc));
 } /* srv_rpcoptions() */
 
 /* ------------------------------------------------------------------------- */
@@ -805,7 +811,7 @@ srv_rpcowner (
   SRV_PROC *spp,
   CS_INT   *lenp
 ) {
-  return (_srv_rpcowner(spp, lenp));
+  return (freetds_srv_rpcowner(spp, lenp));
 } /* srv_rpcowner() */
 
 /* ------------------------------------------------------------------------- */
@@ -814,7 +820,7 @@ CS_RETCODE CS_PUBLIC
 srv_run (
   SRV_SERVER *unused
 ) {
-  return (_srv_run(unused));
+  return (freetds_srv_run(unused));
 } /* srv_run() */
 
 /* ------------------------------------------------------------------------- */
@@ -827,7 +833,7 @@ srv_select (
   SRV_MASK_ARRAY *exceptmask,
   CS_INT          waitflag
 ) {
-  return (_srv_select(nfds, readmask, writemask, exceptmask, waitflag));
+  return (freetds_srv_select(nfds, readmask, writemask, exceptmask, waitflag));
 } /* srv_select() */
 
 /* ------------------------------------------------------------------------- */
@@ -838,7 +844,7 @@ srv_send_text (
   CS_BYTE  *buf,
   CS_INT    buflen
 ) {
-  return (_srv_send_text(spp, buf, buflen));
+  return (freetds_srv_send_text(spp, buf, buflen));
 } /* srv_send_text() */
 
 /* ------------------------------------------------------------------------- */
@@ -850,7 +856,7 @@ srv_senddone (
   CS_INT    transtate,
   CS_INT    count
 ) {
-  return (_srv_senddone(srvproc, status, transtate, count));
+  return (freetds_srv_senddone(srvproc, status, transtate, count));
 } /* srv_senddone() */
 
 /* ------------------------------------------------------------------------- */
@@ -861,7 +867,7 @@ srv_sendinfo (
   CS_SERVERMSG *errmsg,
   CS_INT        tran_state
 ) {
-  return (_srv_sendinfo(spp, errmsg, tran_state));
+  return (freetds_srv_sendinfo(spp, errmsg, tran_state));
 } /* srv_sendinfo() */
 
 /* ------------------------------------------------------------------------- */
@@ -872,7 +878,7 @@ srv_sendpassthru (
   CS_BYTE  *send_bufp,
   CS_INT   *info
 ) {
-  return (_srv_sendpassthru(srvproc, send_bufp, info));
+  return (freetds_srv_sendpassthru(srvproc, send_bufp, info));
 } /* srv_sendpassthru() */
 
 /* ------------------------------------------------------------------------- */
@@ -882,7 +888,7 @@ srv_sendstatus (
   SRV_PROC *srvproc,
   CS_INT    value
 ) {
-  return (_srv_sendstatus(srvproc, value));
+  return (freetds_srv_sendstatus(srvproc, value));
 } /* srv_sendstatus() */
 
 /* ------------------------------------------------------------------------- */
@@ -894,7 +900,7 @@ srv_setcontrol (
   CS_BYTE  *ctrlinfo,
   CS_INT    ctrllen
 ) {
-  return (_srv_setcontrol(spp, colnum, ctrlinfo, ctrllen));
+  return (freetds_srv_setcontrol(spp, colnum, ctrlinfo, ctrllen));
 } /* srv_setcontrol() */
 
 /* ------------------------------------------------------------------------- */
@@ -904,7 +910,7 @@ srv_setloginfo (
   SRV_PROC   *srvproc,
   CS_LOGINFO *loginfo
 ) {
-  return (_srv_setloginfo(srvproc, loginfo));
+  return (freetds_srv_setloginfo(srvproc, loginfo));
 } /* srv_setloginfo() */
 
 /* ------------------------------------------------------------------------- */
@@ -915,7 +921,7 @@ srv_setpri (
   CS_INT    mode,
   CS_INT    priority
 ) {
-  return (_srv_setpri(srvproc, mode, priority));
+  return (freetds_srv_setpri(srvproc, mode, priority));
 } /* srv_setpri() */
 
 /* ------------------------------------------------------------------------- */
@@ -924,7 +930,7 @@ CS_RETCODE CS_PUBLIC
 srv_sigdump (
   CS_INT sig
 ) {
-  return (_srv_sigdump(sig));
+  return (freetds_srv_sigdump(sig));
 } /* srv_sigdump() */
 
 /* ------------------------------------------------------------------------- */
@@ -934,7 +940,7 @@ srv_signal (
   CS_INT          sig,
   SRV_SIGNAL_FUNC funcp
 ) {
-  return (_srv_signal(sig, funcp));
+  return (freetds_srv_signal(sig, funcp));
 } /* srv_signal() */
 
 /* ------------------------------------------------------------------------- */
@@ -948,8 +954,8 @@ srv_sleep (
   CS_VOID *reserved1,
   CS_VOID *reserved2
 ) {
-  return (_srv_sleep(sleepevent, sleeplabel, sleepflags, info, reserved1,
-         reserved2));
+  return (freetds_srv_sleep(sleepevent, sleeplabel, sleepflags, info,
+    reserved1, reserved2));
 } /* srv_sleep() */
 
 /* ------------------------------------------------------------------------- */
@@ -962,7 +968,7 @@ srv_spawn (
   CS_VOID               *argp,
   CS_INT                 priority
 ) {
-  return (_srv_spawn(srvproc, stacksize, funcp, argp, priority));
+  return (freetds_srv_spawn(srvproc, stacksize, funcp, argp, priority));
 } /* srv_spawn() */
 
 /* ------------------------------------------------------------------------- */
@@ -973,7 +979,7 @@ srv_symbol (
   CS_INT  symbol,
   CS_INT *len
 ) {
-  return (_srv_symbol(type, symbol, len));
+  return (freetds_srv_symbol(type, symbol, len));
 } /* srv_symbol() */
 
 /* ------------------------------------------------------------------------- */
@@ -984,7 +990,7 @@ srv_tabcolname (
   CS_INT         colnum,
   CS_BROWSEDESC *bd
 ) {
-  return (_srv_tabcolname(spp, colnum, bd));
+  return (freetds_srv_tabcolname(spp, colnum, bd));
 } /* srv_tabcolname() */
 
 /* ------------------------------------------------------------------------- */
@@ -996,7 +1002,7 @@ srv_tabname (
   CS_CHAR  *tablename,
   CS_INT    namelen
 ) {
-  return (_srv_tabname(spp, tablenum, tablename, namelen));
+  return (freetds_srv_tabname(spp, tablenum, tablename, namelen));
 } /* srv_tabname() */
 
 /* ------------------------------------------------------------------------- */
@@ -1005,7 +1011,7 @@ CS_RETCODE CS_PUBLIC
 srv_termproc (
   SRV_PROC *srvproc
 ) {
-  return (_srv_termproc(srvproc));
+  return (freetds_srv_termproc(srvproc));
 } /* srv_termproc() */
 
 /* ------------------------------------------------------------------------- */
@@ -1017,7 +1023,7 @@ srv_text_info (
   CS_INT     item,
   CS_IODESC *iodesc
 ) {
-  return (_srv_text_info(spp, cmd, item, iodesc));
+  return (freetds_srv_text_info(spp, cmd, item, iodesc));
 } /* srv_text_info() */
 
 /* ------------------------------------------------------------------------- */
@@ -1031,7 +1037,7 @@ srv_thread_props (
   CS_INT    buflen,
   CS_INT   *outlen
 ) {
-  return (_srv_thread_props(spp, cmd, property, buf, buflen, outlen));
+  return (freetds_srv_thread_props(spp, cmd, property, buf, buflen, outlen));
 } /* srv_thread_props() */
 
 /* ------------------------------------------------------------------------- */
@@ -1041,7 +1047,7 @@ srv_ucwakeup (
   SRV_PROC *srvproc,
   CS_INT    wakeflags
 ) {
-  return (_srv_ucwakeup(srvproc, wakeflags));
+  return (freetds_srv_ucwakeup(srvproc, wakeflags));
 } /* srv_ucwakeup() */
 
 /* ------------------------------------------------------------------------- */
@@ -1050,7 +1056,7 @@ CS_RETCODE CS_PUBLIC
 srv_unlockmutex (
   SRV_OBJID mutex_id
 ) {
-  return (_srv_unlockmutex(mutex_id));
+  return (freetds_srv_unlockmutex(mutex_id));
 } /* srv_unlockmutex() */
 
 /* ------------------------------------------------------------------------- */
@@ -1060,7 +1066,7 @@ srv_version (
   CS_CONTEXT *cp,
   CS_INT      version
 ) {
-  return (_srv_version(cp, version));
+  return (freetds_srv_version(cp, version));
 } /* srv_version() */
 
 /* ------------------------------------------------------------------------- */
@@ -1072,7 +1078,7 @@ srv_wakeup (
   CS_VOID *reserved1,
   CS_VOID *reserved2
 ) {
-  return (_srv_wakeup(sleepevent, wakeflags, reserved1, reserved2));
+  return (freetds_srv_wakeup(sleepevent, wakeflags, reserved1, reserved2));
 } /* srv_wakeup() */
 
 /* ------------------------------------------------------------------------- */
@@ -1083,7 +1089,7 @@ srv_xferdata (
   CS_INT    cmd,
   CS_INT    type
 ) {
-  return (_srv_xferdata(spp, cmd, type));
+  return (freetds_srv_xferdata(spp, cmd, type));
 } /* srv_xferdata() */
 
 /* ------------------------------------------------------------------------- */
@@ -1092,7 +1098,7 @@ CS_RETCODE CS_PUBLIC
 srv_yield (
   void
 ) {
-  return (_srv_yield());
+  return (freetds_srv_yield());
 } /* srv_yield() */
 
 /* :vi set ts=2 et sw=2: */
